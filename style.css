@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+body{
+    background-color: rgb(248, 247, 247);
+}
+
+header {
+    display: flex;
+    justify-content: space-around;
+    background-color: white;
+    padding-top: 10px;
+    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.logo{
+    width: 150px;
+}
+
+#search {
+    display: flex;
+    justify-content: space-between;
+}
+
+#search input {
+ margin-top: 21px;   
+ height: 45px;
+ width: 400px;
+ border-radius: 30px;
+ border: solid 1px;
+ border-color: rgb(157, 174, 184);
+ padding-left: 43px;
+ font-size: 1.2em;
+}
+
+.maplogo{
+    margin-top: 20px;
+    height: 45px;
+    margin-left: 40px;
+}
+
+.maplogo :hover {
+    fill: black;
+}
+
+#cover {
+    max-width: 1270px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 130px;
+    padding: 20px;
+}
+
+#cityname {
+    text-transform:capitalize;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.day {
+    height: 120px;
+    max-width: 850px;
+    background-color: white;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.day div {
+    width: 200px;
+    display: flex;
+    align-items: center;
+}
+
+.day div img {
+    height: 70px;
+}
+
+.day div div {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.dag {
+    padding-right: 25px;
+    font-weight: 500;
+    font-size: 1.1em;
+    
+}
+
+h3 {
+    font-size: 2.2em;
+    font-weight: 300;
+}
+
+
+
