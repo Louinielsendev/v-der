@@ -1,29 +1,22 @@
 var weatherResponse 
 var cityvalue 
 var value
+var searchbtn
 
 // init function
 function init(){
+	searchbtn = document.querySelector('#searchbtn')
+	console.log(searchbtn)
 	logo = document.querySelector('.logo')
  	weatherResponses = document.getElementById("cityname")
  	cityvalue = document.getElementById("cityInput")
-	cityvalue.addEventListener("keypress", function(event) {
-		// If the user presses the "Enter" key on the keyboard
-		if (event.key === "Enter") {
-		  // Cancel the default action, if needed
-		  event.preventDefault();
-		  // Trigger the button element with a click
-		  cityName()
-		}
-	  });
-	  
+	searchbtn.addEventListener("click", cityName) 
 }
 
 window.addEventListener("load", init)
 // Get the city name from the input tag
 function cityName() {
 	value = cityvalue.value
-	
 	getLonLat(value)
 }
 // Prints city name on website
@@ -48,6 +41,12 @@ function getLonLat(value) {
 // Save coordinates in variabels
 function lonLatResponse(response) {
 	response = JSON.parse(response);
+	if (response.data[0] == undefined) {
+		document.getElementById('daycover').innerHTML = ""
+				document.querySelector('#cityname').innerHTML = ""
+				document.getElementById('top').innerHTML = "<h1>Tyvärr, platsen finns inte. Sök efter en plats inom Sverige!</h1><img src='img/error.svg' alt=''>"
+				return;
+	}
 	let lat = response.data[0].latitude
 	let lon = response.data[0].longitude
 	requestWeatherResponse(lat, lon)
@@ -62,7 +61,9 @@ function requestWeatherResponse(lat, lon) {
 		if (request.readyState == 4)
 			if (request.status == 200) weatherResponse(request.responseText);
 			else{
-				document.getElementById('top').innerHTML += "Platsen finns inte. Sök efter plats inom Sverige."
+				document.getElementById('daycover').innerHTML = ""
+				document.querySelector('#cityname').innerHTML = ""
+				document.getElementById('top').innerHTML = "<h1>Tyvärr, platsen finns inte. Sök efter en plats inom Sverige!</h1><img src='img/error.svg' alt=''>"
 			} 
 	};
 }
@@ -107,7 +108,7 @@ for (let i = 0; i < response.timeSeries.length; i++){
 	document.getElementById('daycover').innerHTML = HTMLcode
 	
 	const dayHeader = document.querySelectorAll('.dag')
-	dayHeader[0].innerHTML = "Idag"
+	dayHeader[0].innerHTML = "Just nu"
 	dayHeader[1].innerHTML = "Imorgon"
 }
 
