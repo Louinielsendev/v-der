@@ -1,14 +1,12 @@
 var weatherResponse 
 var cityvalue 
-var logo
-
+var value
 
 // init function
 function init(){
 	logo = document.querySelector('.logo')
  	weatherResponses = document.getElementById("cityname")
  	cityvalue = document.getElementById("cityInput")
-	logo.addEventListener("click", cityName)
 	cityvalue.addEventListener("keypress", function(event) {
 		// If the user presses the "Enter" key on the keyboard
 		if (event.key === "Enter") {
@@ -25,7 +23,7 @@ window.addEventListener("load", init)
 // Get the city name from the input tag
 function cityName() {
 	value = cityvalue.value
-	printName(value)
+	
 	getLonLat(value)
 }
 // Prints city name on website
@@ -56,21 +54,25 @@ function lonLatResponse(response) {
 }
 // Get Weather report 
 function requestWeatherResponse(lat, lon) {
+	
 	let request = new XMLHttpRequest(); // Object för Ajax-anropet
 	request.open("GET","https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/" + lon + "/lat/" + lat + "/data.json",true);
 	request.send(null); // Skicka begäran till servern
 	request.onreadystatechange = function () { // Funktion för att avläsa status i kommunikationen
 		if (request.readyState == 4)
 			if (request.status == 200) weatherResponse(request.responseText);
-			else document.innerHTML = "Den begärda resursen finns inte.";
+			else{
+				document.getElementById('top').innerHTML += "Platsen finns inte. Sök efter plats inom Sverige."
+			} 
 	};
 }
 // Print weather report 
 function weatherResponse(response){
+document.getElementById('top').innerHTML = ""	
+printName(value)	
 response = JSON.parse(response);
 let HTMLcode = ""
-console.log(response)
-for (let i = 0; i < 74; i++){
+for (let i = 0; i < response.timeSeries.length; i++){
 	let day = response.timeSeries[i]
 	let time = day["validTime"]
 	const dayTime = "12:00"
@@ -81,7 +83,6 @@ for (let i = 0; i < 74; i++){
 		let text = d.toString();
 		let weekday = text.slice(0, 3)
 		let currentDate = text.slice(4, 11)
-		console.log(d)
 		let parameters = day.parameters
 		// Sort an array with objects by name
 		function compare(a, b) {
@@ -100,7 +101,7 @@ for (let i = 0; i < 74; i++){
 		let tempreture = parameters[12].values[0]
 		let wind = parameters[17].values[0]
 		let rain = parameters[7].values[0]
-		HTMLcode += "<div class=day><div><img src=img/" + icon + ".png alt=><div><h2 class=dag>" + weekday + "</h2><p>"+ currentDate +"</p></div></div><div><div><h3>" + tempreture +"°C</h3></div></div><div><div><h3>" + rain + "mm</h3></div></div><div><div><h3>" + wind + "m/s</h3></div></div></div>"
+		HTMLcode += "<div class=day><div><img src=img/" + icon + ".png alt=><div class=date><h2 class=dag>" + weekday + "</h2><p>"+ currentDate +"</p></div></div><div><div><img src=img/temp.svg alt=><h3 class=temp>" + tempreture +"°C</h3></div></div><div><div><img src=img/rain.svg alt=><h3>" + rain + "mm</h3></div></div><div><div><img src=img/wind.svg alt=><h3>" + wind + "m/s</h3></div></div></div>"
 		}
 	}
 	document.getElementById('daycover').innerHTML = HTMLcode
@@ -108,10 +109,6 @@ for (let i = 0; i < 74; i++){
 	const dayHeader = document.querySelectorAll('.dag')
 	dayHeader[0].innerHTML = "Idag"
 	dayHeader[1].innerHTML = "Imorgon"
-
-	
-
-
 }
 
 

@@ -13,18 +13,54 @@ body{
 }
 
 header {
-    display: flex;
-    justify-content: space-around;
+    height: 100px;
     background-color: white;
-    padding-top: 10px;
     box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
     position: fixed;
     top: 0;
     width: 100%;
 }
 
+header div {
+    padding: 0 0 0 20px;
+    max-width: 1270px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    gap: 100px
+}
+
+header a:nth-of-type(2) {
+    
+    padding-top: 55px;
+    text-decoration: none;
+    color: black;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+}
+header a:nth-of-type(3) {
+    
+    padding-top: 55px;
+    text-decoration: none;
+    color: black;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+}
+
+header a p {
+    display:inline-block;
+}
+
+header a p:hover {
+    border-bottom: 2px solid;
+}
+
 .logo{
+    padding-top: 8px;
     width: 150px;
+    
 }
 
 #search {
@@ -68,7 +104,7 @@ header {
 }
 
 .day {
-    height: 120px;
+    height: 100px;
     max-width: 850px;
     background-color: white;
     border-radius: 10px;
@@ -82,29 +118,40 @@ header {
     width: 200px;
     display: flex;
     align-items: center;
+    
+}
+
+.day div:nth-of-type(2){
+    margin-left: 80px;
 }
 
 .day div img {
     height: 70px;
 }
 
-.day div div {
+.day div div img{
+    height: 25px;
+    margin-right: 5px;
+}
+
+.date{
     display: flex;
     flex-direction: column;
 }
 
-
 .dag {
-    padding-right: 25px;
+    
     font-weight: 500;
     font-size: 1.1em;
     
 }
 
 h3 {
-    font-size: 2.2em;
-    font-weight: 300;
+    font-size: 1.4em;
+    font-weight: 400;
 }
+
+
 
 
 
