@@ -8,51 +8,16 @@
     font-family: 'Inter', sans-serif;
 }
 
+hr{
+    color: rgb(218, 218, 218);
+}
+
 body{
-    background-color: rgb(248, 247, 247);
+    background-color: rgb(250, 250, 250);
 }
 
 header {
     height: 100px;
-    background-color: white;
-    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
-    
-}
-
-header div {
-    padding: 0 0 0 20px;
-    max-width: 1270px;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    gap: 100px
-}
-
-header a:nth-of-type(2) {
-    
-    padding-top: 55px;
-    text-decoration: none;
-    color: black;
-    font-family: 'Inter', sans-serif;
-    font-size: 1.2em;
-    font-weight: 500;
-}
-header a:nth-of-type(3) {
-    
-    padding-top: 55px;
-    text-decoration: none;
-    color: black;
-    font-family: 'Inter', sans-serif;
-    font-size: 1.2em;
-    font-weight: 500;
-}
-
-header a p {
-    display:inline-block;
-}
-
-header a p:hover {
-    border-bottom: 2px solid;
 }
 
 .logo{
@@ -62,6 +27,7 @@ header a p:hover {
 }
 
 #search {
+    margin-top: 20px;
     display: flex;
     justify-content: flex-start;
     position: relative;
@@ -80,6 +46,12 @@ header a p:hover {
     color: white;
   }
 
+ #search img {
+    position: absolute;
+    top: 12px;
+    left: 10px;
+ } 
+
 #search button {
     position: absolute;
     left: 350px;
@@ -94,15 +66,7 @@ header a p:hover {
     cursor: pointer;
 }
 
-.maplogo{
-    margin-top: 20px;
-    height: 45px;
-    margin-left: 40px;
-}
 
-.maplogo :hover {
-    fill: black;
-}
 
 #cover {
     max-width: 1270px;
@@ -110,62 +74,6 @@ header a p:hover {
     margin-right: auto;
     margin-top: 130px;
     padding: 20px;
-}
-
-#cityname {
-    margin-top: 40px;
-    text-transform:capitalize;
-    font-size: 2.5em;
-    margin-bottom: 20px;
-}
-
-.day {
-    height: 100px;
-    max-width: 850px;
-    background-color: white;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: space-between;
-    padding: 5px;
-}
-
-.day div {
-    
-    width: 200px;
-    display: flex;
-    align-items: center;
-    
-}
-
-.day div:nth-of-type(2){
-    margin-left: 80px;
-}
-
-.day div img {
-    height: 70px;
-}
-
-.day div div img{
-    height: 25px;
-    margin-right: 5px;
-}
-
-.date{
-    display: flex;
-    flex-direction: column;
-}
-
-.dag {
-    
-    font-weight: 500;
-    font-size: 1.1em;
-    
-}
-
-h3 {
-    font-size: 1.4em;
-    font-weight: 400;
 }
 
 #top {
@@ -182,4 +90,120 @@ h3 {
     width: 200px;
 }
 
+#cityname {
+    margin-top: 40px;
+    text-transform:capitalize;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
 
+.daycover{
+    min-height: 100px;
+    max-width: 850px;
+    background-color: white;
+    margin-bottom: 10px;
+}
+
+.day {
+    min-height: 100px;
+    display: flex;
+    justify-content: space-around;
+    cursor: pointer;
+}
+
+.day:hover, .active{
+    background-color:aliceblue;
+}
+
+.day div  {
+    
+    width: 200px;
+    display: flex;
+    place-items: center;
+    
+}
+
+.day div:nth-of-type(2){
+    margin-left: 100px;
+}
+
+
+
+.icon{
+    height: 25px;
+    margin-right: 5px;
+}
+
+.weatherImg {
+    height: 70px;
+}
+
+.date{
+    display: flex;
+    flex-direction: column;
+    padding-left: 25px;
+}
+
+.dag {
+    
+    font-weight: 500;
+    font-size: 1.1em;
+    margin-right: auto;
+}
+
+.month {
+    margin-right: auto;
+}
+
+h3 {
+    font-size: 1.4em;
+    font-weight: 400;
+}
+
+.expand {
+    
+    display: none;
+}
+
+
+
+.expand hr {
+    margin-bottom: 15px;
+}
+
+.dayPart {
+    display: flex;
+    justify-content: space-around;
+    
+    margin-bottom: 7px;
+}
+
+
+
+.dayPart img {
+    height: 30px;
+}
+
+.dayPart h3 {
+    font-size: 1em;
+}
+
+.dayPart div  {
+    
+    width: 200px;
+    display: flex;
+    place-items: center;
+    
+}
+
+.dayPart .icon {
+    height: 18px;
+}
+
+.dayPart div:nth-of-type(2){
+    margin-left: 120px;
+}
+
+.dayPart div:nth-of-type(1){
+    justify-content: space-around;
+}
