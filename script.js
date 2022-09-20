@@ -102,7 +102,7 @@ function weatherResponse(response) {
 			let wind = parameters[17].values[0]
 			let rain = parameters[7].values[0]
 			let tempreture = Math.trunc(tempretureDecimal)
-			HTMLcode += "<div class=daycover><div class=day><div><img class=weatherImg src=img/" + icon + ".png alt=><div class=date><h2 class=dag>" + weekday + "</h2><p class=month>" + currentDate + "</p></div></div><div><img class=icon src=img/temp.svg alt=><h3 class=temp>" + tempreture + "°C</h3></div><div><img class=icon src=img/rain.svg alt=><h3>" + rain + "mm</h3></div><div><img class=icon src=img/wind.svg alt=><h3>" + wind + "m/s</h3></div></div><div class=expand ><hr>" + HTMLcodeExpand + "</div></div>"
+			HTMLcode += "<div class=daycover><div class=day><div><img class=weatherImg src=img/" + icon + ".png alt=><div class=date><h2 class=dag>" + weekday + "</h2><p class=month>" + currentDate + "</p></div></div><div><img class=icon src=img/temp.svg alt=><h3 class=temp>" + tempreture + "°C</h3></div><div><img class=icon src=img/rain.svg alt=><h3>" + rain + "mm</h3></div><div><img class=icon src=img/wind.svg alt=><h3>" + wind + "m/s</h3></div></div><div class=expand >" + HTMLcodeExpand + "</div></div>"
 		}
 
 	}
