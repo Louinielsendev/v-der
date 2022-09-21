@@ -5,10 +5,7 @@ var searchbtn
 var dateIndex = 0
 var HTMLcodeExpand = ""
 var dayExpand
-
-
-
-
+var error
 
 // init function
 function init() {
@@ -19,9 +16,9 @@ function init() {
 	weatherResponses = document.getElementById("cityname")
 	cityValue = document.getElementById("cityInput")
 	searchbtn.addEventListener("click", cityName)
-
+	error = document.querySelector('#top')
+	
 }
-
 
 window.addEventListener("load", init)
 // Get the city name from the input tag
@@ -37,6 +34,12 @@ function printName(value) {
 	document.querySelector('#cityname').innerHTML = city
 }
 
+function errorMessage() {
+	document.getElementById('forecastcover').innerHTML = ""
+	document.querySelector('#cityname').innerHTML = ""
+	error.innerHTML = "<h1>Tyvärr, platsen finns inte. Sök efter en plats inom Sverige!</h1><img src='img/error.svg' alt=''>"
+}
+
 // Get city coordinates
 function getLonLat(value) {
 	let request = new XMLHttpRequest(); // Object för Ajax-anropet
@@ -45,17 +48,18 @@ function getLonLat(value) {
 	request.onreadystatechange = function () { // Funktion för att avläsa status i kommunikationen
 		if (request.readyState == 4)
 			if (request.status == 200) lonLatResponse(request.responseText);
-			else return;
-	};
+			else {
+				errorMessage()
+				return
+			}
+	}
 }
 // Save coordinates in variabels
 function lonLatResponse(response) {
 	response = JSON.parse(response);
-	if (response.data[0] == undefined) {
-		document.getElementById('daycover').innerHTML = ""
-		document.querySelector('#cityname').innerHTML = ""
-		document.getElementById('top').innerHTML = "<h1>Tyvärr, platsen finns inte. Sök efter en plats inom Sverige!</h1><img src='img/error.svg' alt=''>"
-		return;
+	if (response.data[0] === undefined) {
+		errorMessage()
+		return
 	}
 	let lat = response.data[0].latitude
 	let lon = response.data[0].longitude
@@ -71,15 +75,13 @@ function requestWeatherResponse(lat, lon) {
 		if (request.readyState == 4)
 			if (request.status == 200) weatherResponse(request.responseText);
 			else {
-				document.getElementById('forecastcover').innerHTML = ""
-				document.querySelector('#cityname').innerHTML = ""
-				document.getElementById('top').innerHTML = "<h1>Tyvärr, platsen finns inte. Sök efter en plats inom Sverige!</h1><img src='img/error.svg' alt=''>"
+				errorMessage()
 			}
 	};
 }
 // Print weather report 
 function weatherResponse(response) {
-	document.getElementById('top').innerHTML = ""
+	error.innerHTML = ""
 	printName(value)
 	response = JSON.parse(response);
 	let HTMLcode = ""
