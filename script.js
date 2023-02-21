@@ -17,7 +17,7 @@ function init() {
 	cityValue = document.getElementById("cityInput")
 	searchbtn.addEventListener("click", cityName)
 	error = document.querySelector('#top')
-	
+
 }
 
 window.addEventListener("load", init)
@@ -37,32 +37,41 @@ function printName(value) {
 function errorMessage() {
 	document.getElementById('forecastcover').innerHTML = ""
 	document.querySelector('#cityname').innerHTML = ""
-	error.innerHTML = "<h1>Tyvärr, platsen finns inte. Sök efter en plats inom Sverige!</h1><img src='img/error.svg' alt=''>"
+	error.innerHTML = "<h1>Tyvärr, något gick fel!</h1><img src='img/error.svg' alt=''>"
 }
 
 // Get city coordinates
 function getLonLat(value) {
-	let request = new XMLHttpRequest(); // Object för Ajax-anropet
-	request.open("GET", "http://api.positionstack.com/v1/forward?access_key=8d0c94662b432799b80e393e1b1de914&query=" + value + "", true);
-	request.send(null); // Skicka begäran till servern
-	request.onreadystatechange = function () { // Funktion för att avläsa status i kommunikationen
-		if (request.readyState == 4)
-			if (request.status == 200) lonLatResponse(request.responseText);
-			else {
-				errorMessage()
-				return
-			}
-	}
+	const options = {
+		method: 'GET',
+		headers: {
+			'X-RapidAPI-Key': 'ed86ccbbd2msh29e85e8dad6a702p1d6dbajsnfdfa0e3774c7',
+			'X-RapidAPI-Host': 'forward-reverse-geocoding.p.rapidapi.com'
+		}
+	};
+
+	fetch('https://forward-reverse-geocoding.p.rapidapi.com/v1/search?q='+value+'&accept-language=en&polygon_threshold=0.0', options)
+		.then(response => response.json())
+		.then(response => lonLatResponse(response))
+		
 }
 // Save coordinates in variabels
 function lonLatResponse(response) {
-	response = JSON.parse(response);
-	if (response.data[0] === undefined) {
+	console.log(response)
+	if (response === undefined) {
 		errorMessage()
 		return
 	}
-	let lat = response.data[0].latitude
-	let lon = response.data[0].longitude
+
+	let lat = response[0].lat
+	let lon = response[0].lon
+	
+	lat = parseFloat(lat);
+	lon = parseFloat(lon);
+	lat = lat.toFixed(6)	
+	lon = lon.toFixed(6)	
+	console.log(lat)
+	
 	requestWeatherResponse(lat, lon)
 }
 // Get Weather report 
